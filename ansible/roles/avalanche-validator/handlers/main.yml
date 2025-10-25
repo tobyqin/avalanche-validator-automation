@@ -1,0 +1,8 @@
+---
+- name: Restart avalanchego
+  community.docker.docker_compose_v2:
+    project_src: "{{ avago_data_dir }}"
+    files:
+      - docker-compose.yml
+    state: present
+    recreate: always

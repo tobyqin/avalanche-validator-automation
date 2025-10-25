@@ -18,12 +18,16 @@
     src: config.json.j2
     dest: "{{ avago_config_file }}"
     mode: '0644'
+  notify:
+  - Restart avalanchego
 
 - name: Template docker-compose file
   ansible.builtin.template:
     src: docker-compose.yml.j2
     dest: "{{ avago_docker_compose_file }}"
     mode: '0644'
+  notify:
+  - Restart avalanchego
 
 - name: Deploy and start avalanchego container
   community.docker.docker_compose_v2:
@@ -31,4 +35,3 @@
     files:
       - docker-compose.yml
     state: present
-    restarted: yes
