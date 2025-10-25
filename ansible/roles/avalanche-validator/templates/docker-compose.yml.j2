@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  avalanchego:
+    image: avaplatform/avalanchego:latest
+    container_name: avalanchego-fuji
+    restart: always
+    ports:
+      - "9650:9650"  # API
+      - "9651:9651"  # Staking
+    volumes:
+      - "{{ avago_data_dir }}/data:/data"
+      - "{{ avago_config_file }}:/etc/avalanchego/config.json"
+    command:
+      - "/avalanchego/build/avalanchego"
+      - "--config-file=/etc/avalanchego/config.json"

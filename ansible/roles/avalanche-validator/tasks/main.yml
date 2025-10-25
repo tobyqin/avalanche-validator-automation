@@ -1,0 +1,34 @@
+---
+- name: Create avalanche data directory
+  ansible.builtin.file:
+    path: "{{ avago_data_dir }}/data"
+    state: directory
+    owner: 1000 # Default docker user, adjust if needed
+    group: 1000
+    mode: '0755'
+
+- name: Create avalanche config directory
+  ansible.builtin.file:
+    path: "{{ avago_config_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Template avalanchego config file
+  ansible.builtin.template:
+    src: config.json.j2
+    dest: "{{ avago_config_file }}"
+    mode: '0644'
+
+- name: Template docker-compose file
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ avago_docker_compose_file }}"
+    mode: '0644'
+
+- name: Deploy and start avalanchego container
+  community.docker.docker_compose:
+    project_src: "{{ avago_data_dir }}"
+    files:
+      - docker-compose.yml
+    state: present
+    restarted: yes
