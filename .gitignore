@@ -206,3 +206,4 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 ansible/inventory.secrets.yml
+PRIVATE.md
