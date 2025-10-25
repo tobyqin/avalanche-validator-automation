@@ -37,14 +37,15 @@ The entire setup and deployment process is automated using **Ansible** and **Doc
     cd avalanche-validator-automation/ansible
     ```
 
-#### 2. Configure Inventory
+#### 2. Configure Inventory (Local & Secret)
 
-Edit the `inventory.ini` file. Replace `YOUR_EC2_IP` with your IP address, and ensure `ansible_user` is correct (e.g., `ubuntu`, `ec2-user`).
+**This project separates inventory from secrets.** The inventory structure (`inventory.ini`) is in Git, but your sensitive IP and key information is stored in `inventory.secrets.yml`, which is git-ignored.
 
-```ini
-[validators]
-YOUR_EC2_IP ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/your-key.pem
-```
+1.  **Copy the secrets template:**
+    ```bash
+    cp inventory.secrets.yml.example inventory.secrets.yml
+    ```
+2.  **Edit `inventory.secrets.yml`** and fill in the EC2 credentials provided to you.
 
 #### 3. Run the Playbook
 
