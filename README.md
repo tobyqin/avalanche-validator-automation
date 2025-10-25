@@ -1,1 +1,107 @@
-# avalanche-validator-automation
+# Avalanche Fuji Validator Automation (Technical Assessment)
+
+This repository contains the automation scripts and documentation to deploy, operate, and monitor an Avalanche Fuji Testnet Validator, as required for the practical assessment.
+
+The entire setup and deployment process is automated using **Ansible** and **Docker**.
+
+## Core Objectives
+
+* **Deploy:** Automate the deployment of an `avalanchego` node (Dockerized) on a target EC2 instance.
+* **Automate:** Use Ansible to provide a repeatable, idempotent deployment process.
+* **Monitor:** Identify and document key operational metrics.
+
+## Tech Stack
+
+* **Automation:** Ansible
+* **Containerization:** Docker & Docker Compose
+* **Base OS (Assumed):** Ubuntu 20.04/22.04 (or any Debian-based Linux with `apt`)
+
+## Repository Structure
+
+```bash
+.
+├── README.md               # This file
+├── MONITORING.md           # Monitoring documentation (Deliverable)
+├── docs                    # Documentation
+└── ansible                 # Ansible playbook
+```
+
+## How to Use
+
+#### 1. Prerequisites (On local machine)
+
+* [Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/index.html)
+* Clone this repository:
+    ```bash
+    git clone https://github.com/tobyqin/avalanche-validator-automation.git
+    cd avalanche-validator-automation/ansible
+    ```
+
+#### 2. Configure Inventory
+
+Edit the `inventory.ini` file. Replace `YOUR_EC2_IP` with your IP address, and ensure `ansible_user` is correct (e.g., `ubuntu`, `ec2-user`).
+
+```ini
+[validators]
+YOUR_EC2_IP ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/your-key.pem
+```
+
+#### 3. Run the Playbook
+
+This command will connect to the EC2 instance, install Docker, and deploy the validator node.
+
+```bash
+ansible-playbook main.yml
+```
+
+The playbook will handle all steps for deploying the validator node.
+
+## Post-Deployment: Manual Steps
+
+Ansible automates the *deployment*, but *registering* as a validator involves manual steps related to funds and timing.
+
+### Step 1: Wait for Node to Sync
+
+  * The node will take several hours to fully bootstrap (sync) with the Fuji testnet.
+  * You can check the status using the monitoring queries. The node is synced when `info.isBootstrapped` returns `true`.
+  * **See `MONITORING.md` for the exact command.**
+
+### Step 2: Get Faucet Funds
+
+  * **C-Chain Address:** You need a wallet (e.g., MetaMask) configured for the Fuji C-Chain.
+  * **Faucet:** Go to [https://faucet.avax.network/](https://faucet.avax.network/) to acquire test AVAX. (Note: This may require a mainnet balance for anti-spam).
+  * **Cross-Chain Transfer:** Use the [Avalanche Core Wallet](https://core.app/) to transfer your test AVAX from the **C-Chain** to the **P-Chain**. Validator staking happens on the P-Chain.
+
+### Step 3: Register as Validator
+
+Once your node is **fully synced** (Step 1) and you have **funds on the P-Chain** (Step 2):
+
+1.  **Get Your NodeID:** SSH into your EC2 instance and run:
+
+    ```bash
+    curl -X POST --data '{
+        "jsonrpc":"2.0",
+        "id"     :1,
+        "method" :"info.getNodeID"
+    }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+    ```
+
+    Copy the `nodeID` from the response (it will look like `NodeID-P7oB...`).
+
+2.  **Stake & Register:**
+
+      * Go to the [Avalanche Core Wallet](https://core.app/) and navigate to the "Stake" section.
+      * Select "Add Validator".
+      * Follow the UI, entering your **NodeID** and staking the required amount for **14 days**.
+
+## Deliverables Checklist
+
+  * [ ] **Running healthy validator:** The Ansible playbook deploys the node.
+  * [ ] **Testnet explorer dashboard URL:** (To be added manually after Step 3)
+      * `https://subnets.avax.network/p-chain/validator/[Your-NodeID]`
+  * [ ] **GitHub repo (scripts, docs):** This repository.
+  * [ ] **E-mail reply with experience:** (To be written post-completion).
+
+## Contact
+
+For any questions or feedback, please contact `tobyqin` at GitHub.
