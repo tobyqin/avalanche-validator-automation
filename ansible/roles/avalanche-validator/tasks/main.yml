@@ -26,7 +26,7 @@
     mode: '0644'
 
 - name: Deploy and start avalanchego container
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ avago_data_dir }}"
     files:
       - docker-compose.yml

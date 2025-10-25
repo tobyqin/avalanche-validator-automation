@@ -37,6 +37,7 @@
           - containerd.io
           - docker-compose-plugin # Note: a-v-a uses docker-compose, not the plugin
         state: present
+        update_cache: yes
 
     - name: Install Python Docker library (for Ansible modules)
       ansible.builtin.pip:

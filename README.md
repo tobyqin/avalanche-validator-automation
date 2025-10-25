@@ -39,7 +39,7 @@ The entire setup and deployment process is automated using **Ansible** and **Doc
 
 #### 2. Configure Inventory (Local & Secret)
 
-**This project separates inventory from secrets.** The inventory structure (`inventory.ini`) is in Git, but your sensitive IP and key information is stored in `inventory.secrets.yml`, which is git-ignored.
+Edit the `inventory.ini` file. Replace `ansible_host` with the your IP address, and ensure `ansible_user` is correct (e.g., `ubuntu`, `ec2-user`).
 
 1.  **Copy the secrets template:**
     ```bash
