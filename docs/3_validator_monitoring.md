@@ -52,7 +52,7 @@ Loop to verify `P`, `C`, `X` chain sync status to ensure they are all synced.
 
 -----
 
-### 2\. Key Metric: Node Health & Liveness
+### 2. Key Metric: Node Health & Liveness
 
 **Concern:** Is the node process running, responding to requests, and healthy?
 
@@ -82,7 +82,7 @@ curl -X POST --data '{
 
 -----
 
-### 3\. Key Metric: Peer Connectivity
+### 3. Key Metric: Peer Connectivity
 
 **Concern:** Is my node properly connected to other peers in the network? Low peer count can indicate a network configuration issue.
 
@@ -119,7 +119,7 @@ The `numPeers` field shows the count.
 
 -----
 
-### 4\. Key Metric: Node ID
+### 4. Key Metric: Node ID
 
 **Concern:** What is my unique Node ID? This is required to register the node as a validator.
 
@@ -147,7 +147,7 @@ curl -X POST --data '{
 
 -----
 
-### 5\. Key Metric: Network Version
+### 5. Key Metric: Network Version
 
 **Concern:** What version of `avalanchego` am I running? This is crucial for planning upgrades.
 

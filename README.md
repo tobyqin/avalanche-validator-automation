@@ -21,7 +21,6 @@ The entire setup and deployment process is automated using **Ansible** and **Doc
 ```bash
 .
 ├── README.md               # This file
-├── MONITORING.md           # Monitoring documentation (Deliverable)
 ├── docs                    # Documentation
 └── ansible                 # Ansible playbook
 ```
@@ -57,10 +56,6 @@ To verify that the node is synced and get extra information, use the following c
 ansible-playbook monitor.yml
 ```
 
-
-
-The playbook will handle all steps for deploying the validator node.
-
 ## Post-Deployment: Manual Steps
 
 Ansible automates the *deployment*, but *registering* as a validator involves manual steps related to funds and timing.
@@ -69,7 +64,7 @@ Ansible automates the *deployment*, but *registering* as a validator involves ma
 
   * The node will take several hours to fully bootstrap (sync) with the Fuji testnet.
   * You can check the status using the monitoring queries. The node is synced when `info.isBootstrapped` returns `true`.
-  * **See `MONITORING.md` for the exact command.**
+  * **See `docs/MONITORING.md` for the exact command.**
 
 ### Step 2: Get Faucet Funds
 

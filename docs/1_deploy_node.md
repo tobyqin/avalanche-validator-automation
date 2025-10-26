@@ -1,3 +1,5 @@
+# Deploy Avalanche Node Documentation
+
 ## Objective
 
 Deploy: Avalanche testnet validator (Dockerized or native) on AWS EC2.
@@ -8,7 +10,7 @@ Lesson Learned: See in [Error Fixed](./error_fixed.md).
 
 1. Install Ansible
 2. Implement node deployment playbook at `ansible` directory
-3. Run `ansible-playbook main.yml` in `ansible` directory
+3. Run `ansible-playbook deploy.yml` in `ansible` directory
 
 ### Why Ansible
 

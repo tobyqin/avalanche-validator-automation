@@ -1,16 +1,12 @@
+# Register Validator Documentation
+
 ## Objective
 
-Validate: Once the node is fully synchronized, register it as a validator on fuji testnet.
+Validate: Once the node is fully synchronized, register it as a validator on fuji testnet
 
 Lesson Learned: See in [Error Fixed](./error_fixed.md).
 
------
-
-## Objective
-
-Validate: Once the node is fully synchronized, register it as a validator on fuji testnet.
-
-### Faucet: Obtain sufficient AVAX for fuji testnet
+## Faucet: Obtain sufficient AVAX for fuji testnet
 
 1.  Go to the Core Wallet Testnet Faucet: `https://core.app/tools/testnet-faucet/`
 2.  Paste your **C-Chain Address** (the `0x...` address from MetaMask or Core Wallet).
@@ -18,7 +14,7 @@ Validate: Once the node is fully synchronized, register it as a validator on fuj
 4.  Click "Request". You should receive test AVAX on the C-Chain.
 5.  Inside the Core Wallet, use the **"Bridge"** feature to transfer your AVAX from the **C-Chain** to the **P-Chain**. (Validator staking requires funds on the P-Chain).
 
-### Verify the node is fully synchronized
+## Verify the node is fully synchronized
 
 The node must be fully synced on all three chains (P, X, and C). Run these commands on your EC2 instance.
 
@@ -90,7 +86,7 @@ The node must be fully synced on all three chains (P, X, and C). Run these comma
 
 7.  Click **"Submit"** and approve the transaction in your wallet.
 
-### Verify the node is a validator
+## Verify the node is a validator
 
 1.  Open the Fuji Testnet Explorer in your browser: `https://subnets-test.avax.network/p-chain`
 2.  Paste your **NodeID** (e.g., `NodeID-...`) into the search bar.
@@ -99,7 +95,7 @@ The node must be fully synced on all three chains (P, X, and C). Run these comma
 
 ![](./images/explore-validator.png)
 
-### Automated testing
+## Automated testing
 
 We can simplify the checks above by running a playbook on local machine.
 
