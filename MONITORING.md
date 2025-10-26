@@ -61,7 +61,7 @@ This is a quick check to see if the node is "alive".
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"health.getLiveness"
+    "method" :"health.health"
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health
 ```
 
@@ -137,7 +137,7 @@ curl -X POST --data '{
 {
     "jsonrpc": "2.0",
     "result": {
-        "nodeID": "NodeID-P7oB2McjBGcW2i1V84aW4G8gmy8f6mHLY"
+        "nodeID": "NodeID-..."
     },
     "id": 1
 }
@@ -165,7 +165,7 @@ curl -X POST --data '{
 {
     "jsonrpc": "2.0",
     "result": {
-        "version": "avalanche/1.11.1"
+        "version": "avalanche/1.13.5"
     },
     "id": 1
 }
