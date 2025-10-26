@@ -105,8 +105,8 @@ Once your node is **fully synced** (Step 1) and you have **funds on the P-Chain*
   * [x] **Running healthy validator:** The Ansible playbook deploys the node.
   * [x] **Testnet explorer dashboard URL:** (To be added manually after Step 3)
       * `https://subnets-test.avax.network/validators/[Your-NodeID]`
-  * [ ] **GitHub repo (scripts, docs):** This repository.
-  * [ ] **E-mail reply with experience:** (To be written post-completion).
+  * [x] **GitHub repo (scripts, docs):** This repository.
+  * [x] **E-mail reply with experience:** (To be written post-completion).
 
 ## Contact
 

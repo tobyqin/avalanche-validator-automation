@@ -12,7 +12,36 @@ Lesson Learned: See in [Error Fixed](./error_fixed.md).
 
 ### Why Ansible
 
+- https://docs.ansible.com/
+
+Pros:
+1. Automation & Repeatability, we can automate the entire process (installing dependencies, configuring the node, and starting the node and more) with a playbook (one command).
+2. Idempotency, we can run the playbook multiple times and ensure the state is consistent.
+3. Infrastructure as Code, the entire setup is defined as human-readable code, we can check it into GitHub, run it on a CI/CD pipeline, and version control.
+4. Agentless, we don't need to install any agent on target machine when using Ansible.
+5. Orchestration, we can define multiple playbook and tasks to orchestrate the deployment process.
+
+Key considerations:
+1. Correct state handling, the owner should know when to `notify` or `trigger` a task, don't trust AI too much.
+2. Managing Secrets, need to find a centralized way to store secrets securely, it should not be part of source code.
+3. Testing(Dry Runs): Never run new playbook on production without testing, always using `--check` to do dry run.
+
 ### Why Docker
+
+- https://build.avax.network/docs/nodes/run-a-node/using-docker
+
+Pros:
+1. Easy & Fast Upgrades, this is crucial for urgent network updates and security patches.
+2. Consistent Environment, the node is running in a predictable and official environment, regardless of your infrastructure.
+3. Clean Automation, just managing a `docker-compose.yml` file is enough.
+4. Portable & Isolation, the config, the volume are easy to back up or migrate.
+
+Key considerations:
+1. Data persistence, we must mount the database directory to persist docker volume.
+2. Log management, docker's default logging driver will write logs to the host disk, the avalanchego node is very chatty and will fill up the disk then crash. We must configure a log rotation in docker compose file.
+3. Networking performance, the default bridge network adds a small layer of NAT, for high performance production nodes, we could use `host` mode to gain raw network performance.
+4. Docker Daemon as a SPOF, if docker service is crashed or need to be restarted, the node will be unavailable.
+
 
 ## Playbook Logs
 
