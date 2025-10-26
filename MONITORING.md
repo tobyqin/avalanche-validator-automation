@@ -48,6 +48,8 @@ curl -X POST --data '{
 }
 ```
 
+Loop to verify `P`, `C`, `X` chain sync status to ensure they are all synced.
+
 -----
 
 ### 2\. Key Metric: Node Health & Liveness
