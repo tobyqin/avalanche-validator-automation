@@ -154,7 +154,13 @@ install_grafana() {
   sudo apt-get update -y
   sudo apt-get install grafana -y
 
+  echo "Configuring Grafana port to 4000..."
+  sudo sed -i 's/;http_port = 3000/http_port = 4000/' /etc/grafana/grafana.ini
+
   echo "Starting Grafana service..."
+  sudo systemctl daemon-reload
+  sudo systemctl start grafana-server
+  sudo systemctl enable grafana-server.service
   sudo systemctl daemon-reload
   sudo systemctl start grafana-server
   sudo systemctl enable grafana-server.service
@@ -166,7 +172,7 @@ install_grafana() {
   echo "To check that the service is running use the following command (q to exit):"
   echo "sudo systemctl status grafana-server"
   echo
-  echo "You can also check Grafana web interface, available on http://your-node-host-ip:3000/"
+  echo "You can also check Grafana web interface, available on http://your-node-host-ip:4000/"
   echo
   echo "Now you need to set up Prometheus as a data source for Grafana. Refer to the tutorial:"
   echo "https://docs.avax.network/nodes/maintain/setting-up-node-monitoring#exporter"
