@@ -1,5 +1,5 @@
 ---
-- name: Verify Avalanche Node Sync Status
+- name: Monitor Avalanche Node Status
   hosts: validators
   become: yes
   vars:

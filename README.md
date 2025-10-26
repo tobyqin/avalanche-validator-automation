@@ -41,19 +41,23 @@ The entire setup and deployment process is automated using **Ansible** and **Doc
 
 Edit the `inventory.ini` file. Replace `ansible_host` with the your IP address, and ensure `ansible_user` is correct (e.g., `ubuntu`, `ec2-user`).
 
-1.  **Copy the secrets template:**
-    ```bash
-    cp inventory.secrets.yml.example inventory.secrets.yml
-    ```
-2.  **Edit `inventory.secrets.yml`** and fill in the EC2 credentials provided to you.
-
 #### 3. Run the Playbook
 
 This command will connect to the EC2 instance, install Docker, and deploy the validator node.
 
 ```bash
-ansible-playbook main.yml
+ansible-playbook deploy.yml
 ```
+
+The deploy playbook will install Docker and Docker Compose, and then deploy the validator node and verify that the node is running, but it will not verify the is synced.
+
+To verify that the node is synced and get extra information, use the following command:
+
+```bash
+ansible-playbook monitor.yml
+```
+
+
 
 The playbook will handle all steps for deploying the validator node.
 
