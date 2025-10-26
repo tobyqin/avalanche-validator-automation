@@ -11,7 +11,7 @@
     monitoring_compose_file: "{{ monitoring_dir }}/docker-compose-monitoring.yml"
 
   tasks:
-    - name: Ensure monitoring directories exist
+    - name: Ensure base monitoring directories exist (owned by ubuntu/1000)
       ansible.builtin.file:
         path: "{{ item }}"
         state: directory
@@ -21,9 +21,23 @@
       loop:
         - "{{ monitoring_dir }}"
         - "{{ monitoring_config_dir }}"
-        - "{{ prometheus_data_dir }}"
-        - "{{ grafana_data_dir }}"
         - "{{ monitoring_config_dir }}/grafana_provisioning"
+
+    - name: Ensure Prometheus data directory exists (owned by nobody/65534)
+      ansible.builtin.file:
+        path: "{{ prometheus_data_dir }}"
+        state: directory
+        mode: '0755'
+        owner: 65534
+        group: 65534
+
+    - name: Ensure Grafana data directory exists (owned by grafana/472)
+      ansible.builtin.file:
+        path: "{{ grafana_data_dir }}"
+        state: directory
+        mode: '0755'
+        owner: 472
+        group: 472
 
     - name: Template Prometheus configuration
       ansible.builtin.template:
