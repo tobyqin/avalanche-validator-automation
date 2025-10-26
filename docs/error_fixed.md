@@ -55,24 +55,16 @@ Need to pay attention to:
 2. Use the Stake menu on left side, but not use the bridge button on main wallet
 3. Need to leave enough balance for gas
 
-### Cannot get BLS public key and signature from API
+### Need BLS public key and signature for registration
 
-Due to security issue, the API will not return the BLS public key and signature.
+https://build.avax.network/docs/api-reference/info-api#infogetnodeid
 
 ```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
-    "id":1,
-    "method":"platform.getNodePOP"
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/platform
-```
-
-This solution is not working due to platform api is not enabled by default due to security issue.
-
-Now switching to docker logs:
-
-```bash
-sudo docker logs avalanchego-fuji | grep "nodePOP"
+    "id"     :1,
+    "method" :"info.getNodeID"
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
 ### Validator node is unhealthy
@@ -89,7 +81,7 @@ ubuntu@ip:~$ curl -X POST --data '{
 
 The node is highly synced, BLS key, diskspace and network are all healthy, but the node is not healthy because it has no inbound connections.
 
-Most likely the node is not connected to any other nodes due to firewall configuration. 
+Most likely the node is not connected to any other nodes due to firewall configuration.
 
 Now verify it by:
 1. Stop the docker container `sudo docker stop avalanchego-fuji`

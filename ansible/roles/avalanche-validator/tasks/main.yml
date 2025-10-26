@@ -42,12 +42,15 @@
     dest: "/tmp/verify_node_deployment.py"
     mode: '0755'
 
-- name: Run node verification script
+- name: Run node verification script with retries
   ansible.builtin.command:
     cmd: python3 /tmp/verify_node_deployment.py
   register: verification_result
   changed_when: false
   failed_when: verification_result.rc != 0
+  retries: 15
+  delay: 10
+  until: verification_result.rc == 0
 
 - name: Display verification results
   ansible.builtin.debug:
