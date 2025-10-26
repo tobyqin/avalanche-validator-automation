@@ -6,8 +6,9 @@ Okay, here is a more concise version:
 * **Config Management:** Templated configs (`.j2`), used Ansible handlers for reliable restarts on change.
 * **Funding:** Used alternative faucet (Core Wallet + code) due to mainnet requirement; bridged C->P chain for staking.
 * **Registration:** Staked via Core Wallet UI using NodeID & BLS PoP (from logs).
-* **Log Rotation:** Configured in Docker Compose (size) & `config.json` (time) to prevent disk full.
+* **Testing:** Tested with `curl` & Python scripts, integrated into Ansible playbook, ready for CICD pipeline.
 * **Monitoring:** Deployed Prometheus/Grafana via Ansible then official approach, scraped node metrics (`:9650`), imported official dashboards.
+* **Log Rotation:** Configured in Docker Compose (size) & `config.json` (time) to prevent disk full.
 
 ### Issues Encountered / Discoveries
 
@@ -24,5 +25,6 @@ Okay, here is a more concise version:
 * **Automation is Key:** Ansible saved time, ensured repeatability.
 * **Verify Assumptions:** Testnet params (staking duration) differ from mainnet/docs.
 * **Troubleshooting:** Systematically addressed network, config, and permission issues for node operation.
-* **Monitoring:** App + System metrics (`node_exporter`) needed for full picture.
-* **Avalanche Arch:** Practical understanding of P/C chains, ports (`9650`/`9651`), PoP.
+* **Monitoring:** Practical understanding Business + Machine metrics (`node_exporter`) for Avalanche.
+* **Avalanche Arch:** Practical understanding of P/C/X chains, ports (`9650`/`9651`), PoP. Reading official docs for key concepts.
+* **Touching Avalanche:** Hand-on experience with Avalanche applications, core app, explorer, wallet, etc.
