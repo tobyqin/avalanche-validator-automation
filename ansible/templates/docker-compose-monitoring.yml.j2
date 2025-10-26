@@ -1,0 +1,32 @@
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: always
+    ports:
+      - "9090:9090"  # Prometheus UI
+    volumes:
+      - "{{ monitoring_config_dir }}/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "{{ prometheus_data_dir }}:/prometheus"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=14d'
+      - '--storage.tsdb.retention.size=10GB'
+    networks:
+      - monitoring-net
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    restart: always
+    ports:
+      - "4000:3000"  # Grafana UI
+    volumes:
+      - "{{ grafana_data_dir }}:/var/lib/grafana"
+      - "{{ monitoring_config_dir }}/grafana_provisioning:/etc/grafana/provisioning/datasources"
+    networks:
+      - monitoring-net
+
+networks:
+  monitoring-net:
+    driver: bridge

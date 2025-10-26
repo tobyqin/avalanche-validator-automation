@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'avalanche-validator'
+    metrics_path: /ext/metrics
+    static_configs:
+      - targets:
+          - '{{ ansible_default_ipv4.address }}:9650'

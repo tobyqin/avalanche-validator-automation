@@ -23,3 +23,13 @@ What it does:
 2. Check node sync status as a validator
 3. Print node's info and sync info if successful
 4. Print detail error message if any check failed
+
+### Deploy Prometheus and Grafana playbook
+
+```bash
+ansible-playbook -i hosts.ini deploy-monitoring-stack.yml
+```
+What it does:
+1. Deploy Prometheus and Grafana using Docker Compose
+2. Bake Avalanche node's exporter into Prometheus config
+3. Expose Grafana on port 4000

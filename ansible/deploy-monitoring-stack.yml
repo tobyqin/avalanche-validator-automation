@@ -1,0 +1,52 @@
+---
+- name: Deploy Prometheus & Grafana Monitoring Stack
+  hosts: validators
+  become: yes
+
+  vars:
+    monitoring_dir: /srv/monitoring
+    monitoring_config_dir: "{{ monitoring_dir }}/config"
+    prometheus_data_dir: "{{ monitoring_dir }}/data/prometheus"
+    grafana_data_dir: "{{ monitoring_dir }}/data/grafana"
+    monitoring_compose_file: "{{ monitoring_dir }}/docker-compose-monitoring.yml"
+
+  tasks:
+    - name: Ensure monitoring directories exist
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+        owner: 1000
+        group: 1000
+      loop:
+        - "{{ monitoring_dir }}"
+        - "{{ monitoring_config_dir }}"
+        - "{{ prometheus_data_dir }}"
+        - "{{ grafana_data_dir }}"
+        - "{{ monitoring_config_dir }}/grafana_provisioning"
+
+    - name: Template Prometheus configuration
+      ansible.builtin.template:
+        src: templates/prometheus.yml.j2
+        dest: "{{ monitoring_config_dir }}/prometheus.yml"
+        mode: '0644'
+
+    - name: Template Grafana datasource configuration
+      ansible.builtin.template:
+        src: templates/grafana-datasource.yml.j2
+        dest: "{{ monitoring_config_dir }}/grafana_provisioning/datasource.yml"
+        mode: '0644'
+
+    - name: Template Monitoring Docker Compose file
+      ansible.builtin.template:
+        src: templates/docker-compose-monitoring.yml.j2
+        dest: "{{ monitoring_compose_file }}"
+        mode: '0644'
+
+    - name: Deploy and start monitoring stack
+      community.docker.docker_compose_v2:
+        project_src: "{{ monitoring_dir }}"
+        files:
+          - docker-compose-monitoring.yml
+        state: present
+        recreate: always
