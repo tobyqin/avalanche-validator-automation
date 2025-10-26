@@ -3,5 +3,13 @@
   "db-dir": "/data",
   "http-host": "0.0.0.0",
   "staking-port": 9651,
-  "public-ip-resolution-service": "opendns"
+  "public-ip-resolution-service": "opendns",
+  "loggingConfig": {
+    "directory": "/root/.avalanchego/logs",
+    "logLevel": "INFO",
+    "logFormat": "plain",
+    "maxAge": 7,
+    "maxFiles": 3,
+    "maxSize": 8
+  }
 }

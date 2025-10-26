@@ -12,3 +12,8 @@ services:
     command:
       - "/avalanchego/build/avalanchego"
       - "--config-file=/etc/avalanchego/config.json"
+    logging:
+          driver: "json-file"
+          options:
+            max-size: "100m"
+            max-file: "14"
