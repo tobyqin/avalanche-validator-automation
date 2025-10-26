@@ -87,19 +87,20 @@ Once your node is **fully synced** (Step 1) and you have **funds on the P-Chain*
     }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
     ```
 
-    Copy the `nodeID` from the response (it will look like `NodeID-P7oB...`).
+    Copy the `nodeID` from the response (it will look like `NodeID-...`).
 
 2.  **Stake & Register:**
 
-      * Go to the [Avalanche Core Wallet](https://core.app/) and navigate to the "Stake" section.
+      * Go to the [Avalanche Core Wallet](https://core.app/), switch to testnet.
+      * Navigate to the "Stake" section.
       * Select "Add Validator".
       * Follow the UI, entering your **NodeID** and staking the required amount for **14 days**.
 
 ## Deliverables Checklist
 
-  * [ ] **Running healthy validator:** The Ansible playbook deploys the node.
-  * [ ] **Testnet explorer dashboard URL:** (To be added manually after Step 3)
-      * `https://subnets.avax.network/p-chain/validator/[Your-NodeID]`
+  * [x] **Running healthy validator:** The Ansible playbook deploys the node.
+  * [x] **Testnet explorer dashboard URL:** (To be added manually after Step 3)
+      * `https://subnets-test.avax.network/validators/[Your-NodeID]`
   * [ ] **GitHub repo (scripts, docs):** This repository.
   * [ ] **E-mail reply with experience:** (To be written post-completion).
 
