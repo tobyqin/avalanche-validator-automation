@@ -33,3 +33,11 @@ What it does:
 1. Deploy Prometheus and Grafana using Docker Compose
 2. Bake Avalanche node's exporter into Prometheus config
 3. Expose Grafana on port 4000
+
+### Remove Prometheus and Grafana playbook
+```bash
+ansible-playbook -i hosts.ini remove-monitoring-stack.yml
+```
+What it does:
+1. Remove Prometheus and Grafana
+2. Update the playbook to remove entire file and directory from server if needed

@@ -1,0 +1,38 @@
+---
+- name: Remove Prometheus & Grafana Monitoring Stack
+  hosts: validators
+  become: yes
+
+  vars:
+    monitoring_dir: /srv/monitoring
+    monitoring_config_dir: "{{ monitoring_dir }}/config"
+    prometheus_data_dir: "{{ monitoring_dir }}/data/prometheus"
+    grafana_data_dir: "{{ monitoring_dir }}/data/grafana"
+    monitoring_compose_file: "{{ monitoring_dir }}/docker-compose-monitoring.yml"
+
+  tasks:
+    - name: Stop and remove monitoring stack containers
+      community.docker.docker_compose_v2:
+        project_src: "{{ monitoring_dir }}"
+        files:
+          - docker-compose-monitoring.yml
+        state: absent
+        remove_orphans: yes
+        remove_volumes: yes
+
+    # uncomment to remove monitoring stack directories and files
+    # - name: Remove monitoring directories and files
+    #   ansible.builtin.file:
+    #     path: "{{ item }}"
+    #     state: absent
+    #   loop:
+    #     - "{{ monitoring_dir }}"
+    #     - "{{ monitoring_config_dir }}"
+    #     - "{{ prometheus_data_dir }}"
+    #     - "{{ grafana_data_dir }}"
+    #     - "{{ monitoring_compose_file }}"
+
+    # - name: Remove base monitoring directory
+    #   ansible.builtin.file:
+    #     path: "{{ monitoring_dir }}"
+    #     state: absent
