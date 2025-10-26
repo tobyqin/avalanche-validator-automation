@@ -1,0 +1,42 @@
+---
+- name: Verify Avalanche Node Sync Status
+  hosts: validators
+  become: yes
+  vars:
+    # Ensure python3 is used
+    ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+    - name: Copy node deployment verification script
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/../tests/verify_node_deployment.py"
+        dest: "/tmp/verify_node_deployment.py"
+        mode: '0755'
+
+    - name: Run node deployment verification script (pre-check)
+      ansible.builtin.command:
+        cmd: python3 /tmp/verify_node_deployment.py
+      register: deployment_verification_result
+      changed_when: false
+      failed_when: deployment_verification_result.rc != 0
+
+    - name: Display deployment verification results
+      ansible.builtin.debug:
+        msg: "{{ deployment_verification_result.stdout_lines }}"
+
+    - name: Copy node sync status verification script
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/../tests/verify_node_sync_status.py"
+        dest: "/tmp/verify_node_sync_status.py"
+        mode: '0755'
+
+    - name: Run node sync status verification script
+      ansible.builtin.command:
+        cmd: python3 /tmp/verify_node_sync_status.py
+      register: sync_verification_result
+      changed_when: false
+      failed_when: sync_verification_result.rc != 0
+
+    - name: Display sync status verification results
+      ansible.builtin.debug:
+        msg: "{{ sync_verification_result.stdout_lines }}"

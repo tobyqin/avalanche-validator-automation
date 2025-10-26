@@ -35,3 +35,20 @@
     files:
       - docker-compose.yml
     state: present
+
+- name: Copy node verification script
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../../tests/verify_node_deployment.py"
+    dest: "/tmp/verify_node_deployment.py"
+    mode: '0755'
+
+- name: Run node verification script
+  ansible.builtin.command:
+    cmd: python3 /tmp/verify_node_deployment.py
+  register: verification_result
+  changed_when: false
+  failed_when: verification_result.rc != 0
+
+- name: Display verification results
+  ansible.builtin.debug:
+    msg: "{{ verification_result.stdout_lines }}"
