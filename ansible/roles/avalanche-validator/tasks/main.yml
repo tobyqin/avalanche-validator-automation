@@ -38,7 +38,7 @@
 
 - name: Copy node verification script
   ansible.builtin.copy:
-    src: "{{ playbook_dir }}/../../tests/verify_node_deployment.py"
+    src: "{{ playbook_dir }}/../tests/verify_node_deployment.py"
     dest: "/tmp/verify_node_deployment.py"
     mode: '0755'
 
