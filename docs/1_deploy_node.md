@@ -139,8 +139,64 @@ curl -X POST --data '{
 
 ### Automated testing
 
-We can simplify the checks above by running a script.
+We can simplify the checks above by running a playbook on local machine.
 
+```bash
+cd ansible
+ansible-playbook monitor.yml
 ```
-curl -s https://raw.githubusercontent.com/ava-labs/avalanche-ops/main/scripts/check_node.sh | bash
+
+Example output:
+```bash
+
+PLAY [Monitor Avalanche Node Status] **********************************************************
+
+TASK [Gathering Facts] ************************************************************************
+ok: [fuji-node]
+
+TASK [Copy node deployment verification script] ***********************************************
+changed: [fuji-node]
+
+TASK [Run node deployment verification script (pre-check)] ************************************
+ok: [fuji-node]
+
+TASK [Display deployment verification results] ************************************************
+ok: [fuji-node] => {
+    "msg": [
+        "Verifying basic Avalanche node deployment...",
+        "Target node: 127.0.0.1:9650",
+        "--------------------------------------------------",
+        "✓ Node version: avalanchego/1.13.5",
+        "✓ Node healthy: True",
+        "✓ Node ID: NodeID-...",
+        "✓ Node POP Public Key: ...",
+        "✓ Node POP Proof: ...",
+        "--------------------------------------------------",
+        "✓ Basic node deployment verification PASSED"
+    ]
+}
+
+TASK [Copy node sync status verification script] **********************************************
+ok: [fuji-node]
+
+TASK [Run node sync status verification script] ***********************************************
+ok: [fuji-node]
+
+TASK [Display sync status verification results] ***********************************************
+ok: [fuji-node] => {
+    "msg": [
+        "Verifying Avalanche node sync status...",
+        "Target node: 127.0.0.1:9650",
+        "--------------------------------------------------",
+        "✓ P chain synced: True",
+        "✓ C chain synced: True",
+        "✓ X chain synced: True",
+        "✓ Number of peers: 1878",
+        "--------------------------------------------------",
+        "✓ Node sync status verification PASSED"
+    ]
+}
+
+PLAY RECAP ************************************************************************************
+fuji-node                  : ok=7    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```

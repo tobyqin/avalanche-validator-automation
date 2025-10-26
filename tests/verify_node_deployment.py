@@ -52,7 +52,7 @@ def check_health():
 
 def get_node_id():
     """
-    Get the node's unique ID.
+    Get the node's unique ID and POP.
     """
     result = make_request("info.getNodeID")
     if result is None:
@@ -61,7 +61,7 @@ def get_node_id():
         raise Exception(f"GetNodeID API error: {result['error']}")
     if 'result' not in result:
         raise Exception(f"Unexpected getNodeID response: {result}")
-    return result['result']['nodeID']
+    return result['result']
 
 def get_version():
     """
@@ -82,17 +82,19 @@ def main():
     print("-" * 50)
 
     try:
+        # Get version
+        version = get_version()
+        print(f"✓ Node version: {version}")
+
         # Check node health
         healthy = check_health()
         print(f"✓ Node healthy: {healthy}")
 
-        # Get node ID
-        node_id = get_node_id()
-        print(f"✓ Node ID: {node_id}")
-
-        # Get version
-        version = get_version()
-        print(f"✓ Node version: {version}")
+        # Get node ID and POP
+        node_info = get_node_id()
+        print(f"✓ Node ID: {node_info['nodeID']}")
+        print(f"✓ Node POP Public Key: {node_info['nodePOP']['publicKey']}")
+        print(f"✓ Node POP Proof: {node_info['nodePOP']['proofOfPossession']}")
 
         print("-" * 50)
         print("✓ Basic node deployment verification PASSED")

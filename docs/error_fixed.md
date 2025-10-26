@@ -55,6 +55,8 @@ Need to pay attention to:
 2. Use the Stake menu on left side, but not use the bridge button on main wallet
 3. Need to leave enough balance for gas
 
+![](./images/cross-chain-bridge.png)
+
 ### Need BLS public key and signature for registration
 
 https://build.avax.network/docs/api-reference/info-api#infogetnodeid
@@ -96,8 +98,17 @@ Sent a request to get it opened by email, fixed.
 
 After that, stop the `nc` command and `sudo docker start avalanchego-fuji` to get the node back online.
 
+### Did not set staking end date in future 14 days
 
+Just mistakenly set the staking end date to end of today, the impact would be:
 
+1. The `addValidator` transaction will be failed
+2. I paid a very small fee for the failed attempt
+3. The node is not registered as a validator
 
+However, this is testnet, I found that the node is still registered as a validator and its transaction is accepted.
+![](./images/review-validator.png)
 
+![](./images/explore-validator.png)
 
+I will wait for the node unlocked and try to register as 14 days staking period.
