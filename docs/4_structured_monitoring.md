@@ -109,7 +109,7 @@ curl -X POST --data '{
 ### 4. Check Validator Status (Tier 3)
 
 The simplest and safest way to check your on-chain status (Uptime, Active) is to use the **Testnet Explorer** by searching for your `NodeID`:
-`https://subnets.avax.network/p-chain`
+`https://subnets-test.avax.network/p-chain`
 
 ### Recommended Professional Architecture
 
@@ -118,3 +118,5 @@ For a true production environment, you would not rely on manual `curl` commands.
 1.  **Prometheus:** A time-series database. `avalanchego` natively exposes a Prometheus-compatible endpoint at `http://127.0.0.1:9650/ext/metrics` which includes all Tier 1 and Tier 2 metrics.
 2.  **Grafana:** A visualization tool to build dashboards from the Prometheus data.
 3.  **Alertmanager:** A tool to send proactive alerts (e.g., `"Disk usage > 85%"`) to Slack, PagerDuty, or email *before* the node fails.
+
+See more about this implementation in `monitoring` folder.

@@ -6,7 +6,37 @@ All commands assume you are running them *on the EC2 instance* itself, querying 
 
 ---
 
-### 1. Key Metric: Node Sync Status (Is it bootstrapped?)
+### 1. Key Metric: Node Health & Liveness
+
+**Concern:** Is the node process running, responding to requests, and healthy?
+
+**How to Query (Health API - `health.getLiveness`):**
+This is a quick check to see if the node is "alive".
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"health.health"
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health
+```
+
+**Response (Healthy):**
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "checks": {},
+        "healthy": true
+    },
+    "id": 1
+}
+```
+
+-----
+
+### 2. Key Metric: Node Sync Status (Is it bootstrapped?)
 
 **Concern:** Is my node fully synced with the network? A node cannot validate until it is fully synced.
 
@@ -52,36 +82,6 @@ Loop to verify `P`, `C`, `X` chain sync status to ensure they are all synced.
 
 -----
 
-### 2. Key Metric: Node Health & Liveness
-
-**Concern:** Is the node process running, responding to requests, and healthy?
-
-**How to Query (Health API - `health.getLiveness`):**
-This is a quick check to see if the node is "alive".
-
-```bash
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"health.health"
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health
-```
-
-**Response (Healthy):**
-
-```json
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "checks": {},
-        "healthy": true
-    },
-    "id": 1
-}
-```
-
------
-
 ### 3. Key Metric: Peer Connectivity
 
 **Concern:** Is my node properly connected to other peers in the network? Low peer count can indicate a network configuration issue.
@@ -119,7 +119,32 @@ The `numPeers` field shows the count.
 
 -----
 
-### 4. Key Metric: Node ID
+### 4. Key Metric: Node Uptime
+
+**Concern:** How long has my node been up?
+
+**How to Query (Info API - `info.uptime`):**
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.uptime"
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+```
+
+**Response:**
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "rewardingStakePercentage": "100.0000",
+    "weightedAveragePercentage": "99.0000"
+  }
+}
+```
+
+### 5. Key Metric: Node ID
 
 **Concern:** What is my unique Node ID? This is required to register the node as a validator.
 
@@ -147,7 +172,7 @@ curl -X POST --data '{
 
 -----
 
-### 5. Key Metric: Network Version
+### 6. Key Metric: Node Version
 
 **Concern:** What version of `avalanchego` am I running? This is crucial for planning upgrades.
 

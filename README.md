@@ -24,7 +24,7 @@ The entire setup and deployment process is automated using **Ansible** and **Doc
 ├── README.md               # This file
 ├── docs                    # Documentation
 ├── tests                   # Test scripts
-├── scripts                 # Scripts
+├── monitoring              # Monitoring scripts
 └── ansible                 # Ansible playbook
 ```
 
