@@ -1,0 +1,10 @@
+---
+- name: Remove Avalanche Docker Node
+  hosts: validators
+  become: yes
+  vars:
+    # Ensure python3 is used
+    ansible_python_interpreter: /usr/bin/python3
+
+  roles:
+    - role: remove-docker-node

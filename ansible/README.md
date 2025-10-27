@@ -24,6 +24,17 @@ What it does:
 3. Check systemctl service status
 4. Run node verification script to ensure deployment success
 
+## remove docker node playbook
+
+```bash
+ansible-playbook -i hosts.ini remove-node-docker.yml
+```
+
+What it does:
+1. Stop and remove the AvalancheGo Docker container
+2. Remove associated Docker volumes
+3. Clean up orphaned containers (optional directory removal commented out)
+
 ## Proactive monitoring playbook
 
 ```bash

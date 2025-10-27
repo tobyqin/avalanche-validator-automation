@@ -1,0 +1,20 @@
+---
+- name: Stop and remove avalanchego container
+  community.docker.docker_compose_v2:
+    project_src: "{{ avago_data_dir }}"
+    files:
+      - docker-compose.yml
+    state: absent
+    remove_orphans: yes
+    remove_volumes: yes
+
+# Optional: Remove directories and files (uncomment if needed)
+# - name: Remove avalanche data directory
+#   ansible.builtin.file:
+#     path: "{{ avago_data_dir }}"
+#     state: absent
+
+# - name: Remove avalanche config directory
+#   ansible.builtin.file:
+#     path: "{{ avago_config_dir }}"
+#     state: absent
