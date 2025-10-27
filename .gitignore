@@ -208,3 +208,4 @@ __marimo__/
 ansible/inventory.secrets.yml
 PRIVATE.md
 *.log
+example*.json
