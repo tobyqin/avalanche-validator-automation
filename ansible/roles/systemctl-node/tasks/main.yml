@@ -7,7 +7,7 @@
 
 - name: Run AvalancheGo installer script
   ansible.builtin.command:
-    cmd: /tmp/avalanchego-installer.sh --ip static --fuji --rpc private --state-sync on --index --version v1.13.5
+    cmd: /tmp/avalanchego-installer.sh --fuji --ip dynamic --rpc private --state-sync on --index --admin --version v1.14.0-fuji
   register: installer_result
   changed_when: true
   become: false
