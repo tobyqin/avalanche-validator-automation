@@ -6,11 +6,11 @@ Deploy: Avalanche testnet validator (Dockerized or native) on AWS EC2.
 
 Lesson Learned: See in [Error Fixed](./error_fixed.md).
 
-## Automate by Ansible+Docker
+## Automate by Ansible+Docker or Ansible+systemd
 
 1. Install Ansible
 2. Implement node deployment playbook at `ansible` directory
-3. Run `ansible-playbook deploy-docker-node.yml` in `ansible` directory
+3. Run `ansible-playbook deploy-node-docker.yml` (Docker) or `ansible-playbook deploy-node-systemctl.yml` (systemd) in `ansible` directory
 
 ### Why Ansible
 
@@ -43,6 +43,21 @@ Key considerations:
 2. Log management, docker's default logging driver will write logs to the host disk, the avalanchego node is very chatty and will fill up the disk then crash. We must configure a log rotation in docker compose file.
 3. Networking performance, the default bridge network adds a small layer of NAT, for high performance production nodes, we could use `host` mode to gain raw network performance.
 4. Docker Daemon as a SPOF, if docker service is crashed or need to be restarted, the node will be unavailable.
+
+### Why systemd (Native Installation)
+
+- https://build.avax.network/docs/nodes/run-a-node/manually
+
+Pros:
+1. Direct system integration, no container overhead or dependencies.
+2. Official installer script handles all setup automatically.
+3. Native service management with systemctl for reliability.
+4. Direct access to system resources and logs.
+
+Key considerations:
+1. System package management, updates require running the installer again.
+2. Direct system impact, potential conflicts with other services.
+3. Manual configuration management compared to containerized approach.
 
 
 ## Playbook Logs
