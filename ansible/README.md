@@ -1,7 +1,7 @@
 ## deploy node playbook
 
 ```bash
-ansible-playbook -i hosts.ini deploy-docker-node.yml
+ansible-playbook -i hosts.ini deploy-node-docker.yml
 ```
 
 What it does:
@@ -11,6 +11,18 @@ What it does:
 4. Deploy Avalanche Node using Docker Compose
 5. Wait for node to be heathy and print node's info
 6. Optimized logging for docker and avalanche, ensure logs will not fill up your disk
+
+## deploy systemctl node playbook
+
+```bash
+ansible-playbook -i hosts.ini deploy-node-systemctl.yml
+```
+
+What it does:
+1. Download and run AvalancheGo installer script with specific parameters
+2. Install AvalancheGo as a systemd service
+3. Check systemctl service status
+4. Run node verification script to ensure deployment success
 
 ## Proactive monitoring playbook
 

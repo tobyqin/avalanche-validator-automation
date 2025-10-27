@@ -1,0 +1,47 @@
+---
+- name: Download AvalancheGo installer script
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh
+    dest: /tmp/avalanchego-installer.sh
+    mode: '0755'
+
+- name: Run AvalancheGo installer script
+  ansible.builtin.command:
+    cmd: /tmp/avalanchego-installer.sh --ip static --fuji --rpc private --state-sync on --index --version v1.14.0-fuji
+  register: installer_result
+  changed_when: true
+
+- name: Display installer output
+  ansible.builtin.debug:
+    msg: "{{ installer_result.stdout_lines }}"
+
+- name: Check systemctl service status
+  ansible.builtin.command:
+    cmd: systemctl status avalanchego
+  register: service_status
+  changed_when: false
+  failed_when: service_status.rc != 0
+
+- name: Display service status
+  ansible.builtin.debug:
+    msg: "{{ service_status.stdout_lines }}"
+
+- name: Copy node verification script
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../tests/verify_node_deployment.py"
+    dest: "/tmp/verify_node_deployment.py"
+    mode: '0755'
+
+- name: Run node verification script with retries
+  ansible.builtin.command:
+    cmd: python3 /tmp/verify_node_deployment.py
+  register: verification_result
+  changed_when: false
+  failed_when: verification_result.rc != 0
+  retries: 15
+  delay: 10
+  until: verification_result.rc == 0
+
+- name: Display verification results
+  ansible.builtin.debug:
+    msg: "{{ verification_result.stdout_lines }}"

@@ -1,0 +1,10 @@
+---
+- name: Deploy Avalanche Fuji Validator (systemctl)
+  hosts: validators
+  become: yes
+  vars:
+    # Ensure python3 is used
+    ansible_python_interpreter: /usr/bin/python3
+
+  roles:
+    - role: systemctl-node
