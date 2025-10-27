@@ -1,6 +1,6 @@
-# Avalanche Fuji Validator Automation (Technical Assessment)
+# Avalanche Fuji Validator Automation
 
-This repository contains the automation scripts and documentation to deploy, operate, and monitor an Avalanche Fuji Testnet Validator, as required for the practical assessment.
+This repository contains the automation scripts and documentation to deploy, operate, and monitor an Avalanche Fuji Testnet Validator, for a practical assessment.
 
 The entire setup and deployment process is automated using **Ansible** and **Docker**.
 
@@ -23,6 +23,8 @@ The entire setup and deployment process is automated using **Ansible** and **Doc
 .
 ├── README.md               # This file
 ├── docs                    # Documentation
+├── tests                   # Test scripts
+├── scripts                 # Scripts
 └── ansible                 # Ansible playbook
 ```
 
