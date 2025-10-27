@@ -6,14 +6,15 @@ The entire setup and deployment process is automated using **Ansible** and **Doc
 
 ## Core Objectives
 
-* **Deploy:** Automate the deployment of an `avalanchego` node (Dockerized) on a target EC2 instance.
+* **Deploy:** Automate the deployment of an `avalanchego` node (Dockerized or native systemd service) on a target EC2 instance.
 * **Automate:** Use Ansible to provide a repeatable, idempotent deployment process.
 * **Monitor:** Identify and document key operational metrics.
 
 ## Tech Stack
 
 * **Automation:** Ansible
-* **Containerization:** Docker & Docker Compose
+* **Containerization:** Docker & Docker Compose (optional)
+* **Service Management:** systemd (native deployment option)
 * **Base OS (Assumed):** Ubuntu 20.04/22.04 (or any Debian-based Linux with `apt`)
 
 ## Repository Structure
@@ -45,10 +46,16 @@ Edit the `inventory.ini` file. Replace `ansible_host` with the your IP address, 
 This command will connect to the EC2 instance, install Docker, and deploy the validator node.
 
 ```bash
-ansible-playbook deploy.yml
+ansible-playbook deploy-node-docker.yml
 ```
 
 The deploy playbook will install Docker and Docker Compose, and then deploy the validator node and verify that the node is running, but it will not verify the is synced.
+
+Alternatively, you can deploy using the native systemd service approach:
+
+```bash
+ansible-playbook deploy-node-systemctl.yml
+```
 
 To verify that the node is synced and get extra information, use the following command:
 
