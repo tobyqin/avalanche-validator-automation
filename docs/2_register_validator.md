@@ -47,7 +47,7 @@ The node must be fully synced on all three chains (P, X, and C). Run these comma
 
 **Goal:** All three commands must return `{"result":{"isBootstrapped":true}}`.
 
-### Register as a validator
+## Register as a validator
 
 1.  **Get your NodeID:** Run this on your EC2 instance.
 
