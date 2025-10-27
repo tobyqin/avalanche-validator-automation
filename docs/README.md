@@ -32,3 +32,5 @@ This document outlines the deployment process for an Avalanche node, including a
 * **Monitoring:** Practical understanding Business + Machine metrics (`node_exporter`) for Avalanche.
 * **Avalanche Arch:** Practical understanding of P/C/X chains, ports (`9650`/`9651`), PoP. Reading official docs for key concepts.
 * **Touching Avalanche:** Hand-on experience with Avalanche applications, core app, explorer, wallet, etc.
+
+Last but not least, **Official Avalanche Documentation** is the best resource to learn about Avalanche, don't trust AI can solve all your problems.
