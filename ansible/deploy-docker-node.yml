@@ -53,4 +53,4 @@
         enabled: yes
 
   roles:
-    - role: avalanche-validator
+    - role: docker-node

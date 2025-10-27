@@ -10,7 +10,7 @@ Lesson Learned: See in [Error Fixed](./error_fixed.md).
 
 1. Install Ansible
 2. Implement node deployment playbook at `ansible` directory
-3. Run `ansible-playbook deploy.yml` in `ansible` directory
+3. Run `ansible-playbook deploy-docker-node.yml` in `ansible` directory
 
 ### Why Ansible
 
@@ -73,19 +73,19 @@ ok: [fuji-node]
 TASK [Ensure Docker service is started] *********************************************************************************************
 ok: [fuji-node]
 
-TASK [avalanche-validator : Create avalanche data directory] ************************************************************************
+TASK [docker-node : Create avalanche data directory] ************************************************************************
 ok: [fuji-node]
 
-TASK [avalanche-validator : Create avalanche config directory] **********************************************************************
+TASK [docker-node : Create avalanche config directory] **********************************************************************
 ok: [fuji-node]
 
-TASK [avalanche-validator : Template avalanchego config file] ***********************************************************************
+TASK [docker-node : Template avalanchego config file] ***********************************************************************
 ok: [fuji-node]
 
-TASK [avalanche-validator : Template docker-compose file] ***************************************************************************
+TASK [docker-node : Template docker-compose file] ***************************************************************************
 ok: [fuji-node]
 
-TASK [avalanche-validator : Deploy and start avalanchego container] *****************************************************************
+TASK [docker-node : Deploy and start avalanchego container] *****************************************************************
 changed: [fuji-node]
 
 PLAY RECAP **************************************************************************************************************************

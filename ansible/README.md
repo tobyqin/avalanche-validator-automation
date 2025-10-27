@@ -1,7 +1,7 @@
 ## deploy node playbook
 
 ```bash
-ansible-playbook -i hosts.ini deploy.yml
+ansible-playbook -i hosts.ini deploy-docker-node.yml
 ```
 
 What it does:

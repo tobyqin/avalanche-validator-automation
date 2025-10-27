@@ -16,16 +16,16 @@ We have to add a ansible handler to handle config changes and docker compose cha
 
 ```bash
 ...
-TASK [avalanche-validator : Template avalanchego config file] ***********************************************************************
+TASK [docker-node : Template avalanchego config file] ***********************************************************************
 changed: [fuji-node]
 
-TASK [avalanche-validator : Template docker-compose file] ***************************************************************************
+TASK [docker-node : Template docker-compose file] ***************************************************************************
 changed: [fuji-node]
 
-TASK [avalanche-validator : Deploy and start avalanchego container] *****************************************************************
+TASK [docker-node : Deploy and start avalanchego container] *****************************************************************
 changed: [fuji-node]
 
-RUNNING HANDLER [avalanche-validator : Restart avalanchego] *************************************************************************
+RUNNING HANDLER [docker-node : Restart avalanchego] *************************************************************************
 changed: [fuji-node]
 ...
 ```
