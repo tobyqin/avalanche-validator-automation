@@ -1,0 +1,27 @@
+---
+- name: Stop avalanchego service
+  ansible.builtin.systemd:
+    name: avalanchego
+    state: stopped
+    enabled: false
+
+- name: Disable avalanchego service
+  ansible.builtin.systemd:
+    name: avalanchego
+    enabled: false
+
+# Optional: Remove service file and binaries (uncomment if needed)
+# - name: Remove avalanchego service file
+#   ansible.builtin.file:
+#     path: /etc/systemd/system/avalanchego.service
+#     state: absent
+
+# - name: Remove avalanchego binaries
+#   ansible.builtin.file:
+#     path: /home/ubuntu/avalanche-node
+#     state: absent
+
+# - name: Remove avalanchego configuration
+#   ansible.builtin.file:
+#     path: /home/ubuntu/.avalanchego
+#     state: absent

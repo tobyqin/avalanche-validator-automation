@@ -35,6 +35,17 @@ What it does:
 2. Remove associated Docker volumes
 3. Clean up orphaned containers (optional directory removal commented out)
 
+## remove systemctl node playbook
+
+```bash
+ansible-playbook -i hosts.ini remove-node-systemctl.yml
+```
+
+What it does:
+1. Stop the avalanchego systemd service
+2. Disable the service from starting on boot
+3. Optional file removal tasks commented out for safety
+
 ## Proactive monitoring playbook
 
 ```bash
