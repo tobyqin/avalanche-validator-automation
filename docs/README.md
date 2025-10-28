@@ -1,6 +1,6 @@
 #  Avalanche Node Deployment Documentation
 
-## Documentation Structure
+## Structure
 
 This documentation is organized into the following sections for a structured reading experience:
 
@@ -19,9 +19,7 @@ This documentation is organized into the following sections for a structured rea
 ### Cheatsheet
 - [`cheatsheet.md`](cheatsheet.md) - Quick reference for diagnosing node issues, checking status, configuration, network connectivity, and validator staking.
 
-### Overview
-
-This document outlines the deployment process for an Avalanche node, including automated setup, configuration management, and monitoring.
+### Conclusion
 
 ### What Was Done & Why
 
