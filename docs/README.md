@@ -1,5 +1,24 @@
 #  Avalanche Node Deployment Documentation
 
+## Documentation Structure
+
+This documentation is organized into the following sections for a structured reading experience:
+
+### Task Overview
+- [`task.md`](task.md) - Objective, requirements, automation, monitoring, constraints, and deliverables for the Avalanche testnet validator deployment.
+
+### Steps
+1. [`1_deploy_node.md`](1_deploy_node.md) - Detailed steps for deploying an Avalanche node using Ansible with Docker or systemd.
+2. [`2_register_validator.md`](2_register_validator.md) - Process for obtaining AVAX, verifying sync status, and registering the node as a validator.
+3. [`3_validator_monitoring.md`](3_validator_monitoring.md) - Key metrics for monitoring node health, sync status, peer connectivity, uptime, and version.
+4. [`4_structured_monitoring.md`](4_structured_monitoring.md) - Comprehensive monitoring strategy including reactive vs proactive approaches, KPIs, and implementation with Prometheus/Grafana.
+
+### Errors Fixed
+- [`error_fixed.md`](error_fixed.md) - Common issues encountered during deployment and registration, with solutions and troubleshooting tips.
+
+### Cheatsheet
+- [`cheatsheet.md`](cheatsheet.md) - Quick reference for diagnosing node issues, checking status, configuration, network connectivity, and validator staking.
+
 ### Overview
 
 This document outlines the deployment process for an Avalanche node, including automated setup, configuration management, and monitoring.

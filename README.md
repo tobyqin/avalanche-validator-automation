@@ -4,6 +4,14 @@ This repository contains the automation scripts and documentation to deploy, ope
 
 The entire setup and deployment process is automated using **Ansible** and **Docker**.
 
+## Documentation
+
+For detailed step-by-step guides, troubleshooting, and best practices, please refer to the [`docs/README.md`](docs/README.md) file.
+
+## Learn More
+
+For a full experience and detailed walkthrough of setting up an Avalanche validator, check out my blog post: [Setup Avalanche Validator](https://tobyqin.cn/posts/2025-10-28/setup-avalanche-validator/).
+
 ## Core Objectives
 
 * **Deploy:** Automate the deployment of an `avalanchego` node (Dockerized or native systemd service) on a target EC2 instance.
